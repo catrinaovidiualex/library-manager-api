@@ -73,4 +73,12 @@ public class BookController {
         return new ResponseEntity<>("taREEEE",HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/{id}")
+    public  ResponseEntity<Book>getBook(@PathVariable Long id){
+        Book book=bookRepository.findById(id).get();
+        return  new ResponseEntity<>(book,HttpStatus.OK);
+    }
+
+
+
 }
