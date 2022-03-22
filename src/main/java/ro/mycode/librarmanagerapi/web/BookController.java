@@ -23,13 +23,14 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-
+    //endpoint pentru afisarea tuturor cartilor
     @GetMapping
     public ResponseEntity<List<Book>> getAll(){
 
         return  new ResponseEntity<>(bookRepository.findAll(), HttpStatus.ACCEPTED);
     }
-    //acesta este un endpoint care ne ajuta sa apelam functia yearBooks
+
+    //endpoint care ne ajuta sa apelam functia yearBooks
     @GetMapping("/year")
     public ResponseEntity<List<Book>> getBooksByYear() {
 
@@ -51,6 +52,7 @@ public class BookController {
 
 
     }
+
     //endpoint pentru afisare carti dupa ID-uri
     @GetMapping("/ids")
     public ResponseEntity<List<Book>> getBooksByIDs(){
@@ -67,12 +69,14 @@ public class BookController {
 
     }
 
+    //endpoint pentru adaugare carte noua
     @PostMapping("/add")
     public ResponseEntity<String> addBook(@RequestBody Book book){
         this.bookRepository.save(book);
         return new ResponseEntity<>("taREEEE",HttpStatus.ACCEPTED);
     }
 
+    //endpoint pentru afisare carte dupa id;
     @GetMapping("/{id}")
     public  ResponseEntity<Book>getBook(@PathVariable Long id){
         Book book=bookRepository.findById(id).get();
