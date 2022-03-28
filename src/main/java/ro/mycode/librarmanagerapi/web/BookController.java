@@ -83,6 +83,30 @@ public class BookController {
         return  new ResponseEntity<>(book,HttpStatus.OK);
     }
 
+    //endpoint pentru update carti
+    @PutMapping("/update")
+    public ResponseEntity<String> updateBooks(@RequestBody Book bk){
+
+         Book book=this.bookRepository.findById(bk.getId()).get(); //cautam cartea in functie de id
+         //setam atributele cartii cu valorile din bd;
+         book.setTitle(bk.getTitle());
+         book.setGenre(bk.getGenre());
+         book.setAuthor(bk.getAuthor());
+         book.setYear(bk.getYear());
+         this.bookRepository.save(book);
+
+         return  new ResponseEntity<>("cartea a fost modificata",HttpStatus.ACCEPTED);
+
+        }
+
+        // endpoint pentru delete carti
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteBooks(@PathVariable Long id){
+        this.bookRepository.deleteById(id);
+
+        return new ResponseEntity<>("s-a sters",HttpStatus.ACCEPTED);
+        }
+
 
 
 }
