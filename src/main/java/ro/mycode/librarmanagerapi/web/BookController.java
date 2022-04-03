@@ -121,8 +121,10 @@ public class BookController {
      }
 
      //endpoint pentru filtrare carti dupa titlu
-     @GetMapping("/filterBooksByTitle")
-    public ResponseEntity<List<Book>> filterBooksByTitle(String titleBook){
+     @GetMapping("/filterBooksByTitle/{titleBook}")
+    public ResponseEntity<List<Book>> filterBooksByTitle(@PathVariable String titleBook){
+
+
 
         return new ResponseEntity<>(bookRepository.filterByTitle(titleBook),HttpStatus.ACCEPTED);
 
