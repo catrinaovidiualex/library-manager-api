@@ -134,6 +134,17 @@ public class BookController {
         return new ResponseEntity<>(book,HttpStatus.ACCEPTED);
     }
 
+    //endpoint pentru sortare carti dupa autor
+    @GetMapping("/sortBooksByAuthor")
+    public ResponseEntity<List<Book>> sortBooksByAuthor(){
+
+        List <Book> myBkList= this.bookRepository.findAll();
+        Collections.sort(myBkList);
+
+        return new ResponseEntity<>(myBkList, HttpStatus.ACCEPTED);
+
+    }
+
 
 
 }
