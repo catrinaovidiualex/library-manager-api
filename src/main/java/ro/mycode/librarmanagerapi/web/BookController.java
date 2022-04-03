@@ -8,6 +8,8 @@ import ro.mycode.librarmanagerapi.model.Book;
 import ro.mycode.librarmanagerapi.repository.BookRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -106,6 +108,25 @@ public class BookController {
 
         return new ResponseEntity<>("s-a sters",HttpStatus.ACCEPTED);
         }
+
+        //endpoint pentru sortare carti in fct de an
+     @GetMapping("/sortBooks")
+    public ResponseEntity<List<Book>> sortBooks(){
+
+        List <Book> myBooksList= this.bookRepository.findAll();
+         Collections.sort(myBooksList);
+
+         return new ResponseEntity<>(myBooksList, HttpStatus.ACCEPTED);
+
+     }
+
+     //endpoint pentru filtrare carti dupa titlu
+     @GetMapping("/filterBooksByTitle")
+    public ResponseEntity<List<Book>> filterBooksByTitle(String titleBook){
+
+        return new ResponseEntity<>(bookRepository.filterByTitle(titleBook),HttpStatus.ACCEPTED);
+
+     }
 
 
 

@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity(name="Book")
 @Table(name="books")
-public class Book {
+public class Book implements Comparable<Book> {
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
@@ -19,4 +19,13 @@ public class Book {
     private String genre;
     private int year;
 
+    @Override
+    public int compareTo(Book o) {
+        if(this.year>o.getYear()){
+            return 1;
+        }else if(this.year<o.getYear()){
+            return -1;
+        }
+        return 0;
+    }
 }
