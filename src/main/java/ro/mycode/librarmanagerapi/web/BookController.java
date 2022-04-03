@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.mycode.librarmanagerapi.model.Book;
 import ro.mycode.librarmanagerapi.repository.BookRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -123,12 +120,19 @@ public class BookController {
      //endpoint pentru filtrare carti dupa titlu
      @GetMapping("/filterBooksByTitle/{titleBook}")
     public ResponseEntity<List<Book>> filterBooksByTitle(@PathVariable String titleBook){
-
-
-
         return new ResponseEntity<>(bookRepository.filterByTitle(titleBook),HttpStatus.ACCEPTED);
 
      }
+
+     //endpoint pentru cea mai noua carte
+    @GetMapping("/newestBook")
+    public ResponseEntity<Book> showNewestBook(){
+
+
+        Book book=this.bookRepository.findAll().stream().max((a,b)->a.compareTo(b)).get();
+
+        return new ResponseEntity<>(book,HttpStatus.ACCEPTED);
+    }
 
 
 
